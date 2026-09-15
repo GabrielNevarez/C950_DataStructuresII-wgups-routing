@@ -22,6 +22,18 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DistanceGraph.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DistanceLoader.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Location.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LocationLoader.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py" />
     <Compile Include="Menu.py">
       <SubType>Code</SubType>
@@ -29,6 +41,15 @@
     <Compile Include="Package.py" />
     <Compile Include="PackageLoader.py" />
     <Compile Include="Packages.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Router.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Truck.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TruckLoader.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

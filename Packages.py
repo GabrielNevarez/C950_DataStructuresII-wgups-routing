@@ -13,8 +13,7 @@ class Packages:
     def _hash(self, package_id):
         return package_id % self.capacity
 
-    def insert(self, package):
-        package_id = package.package_id
+    def insert(self, package_id, package):
         bucket_index = self._hash(package_id)
         bucket = self.table[bucket_index]
 

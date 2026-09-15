@@ -11,8 +11,10 @@ def main():
 
     while running:
         menu.display()
+
         choice = input("Select an option: ")
-        running = menu.get_option(choice)
+
+        running = menu.getOption(choice)
 
 
 if __name__ == "__main__":
