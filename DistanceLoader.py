@@ -1,27 +1,63 @@
+import csv
+
 from DistanceGraph import DistanceGraph
-from Location import Location
 
 
 class DistanceLoader:
+    """
+    Loads distance data from the Distances.csv file.
+
+    Each CSV row contains two location IDs and the mileage
+    between them. The values are stored in the DistanceGraph.
+    """
 
     @staticmethod
-    def load(locations):
-        graph = DistanceGraph(locations)
+    def load(file_path, locations):
+        """
+        Loads distance data into a DistanceGraph.
 
-        # Temporary test distances.
-        graph.set_distance(0, 1, 3.0)
-        graph.set_distance(0, 2, 5.0)
-        graph.set_distance(0, 3, 4.0)
-        graph.set_distance(0, 4, 6.0)
-        graph.set_distance(0, 5, 7.0)
-        graph.set_distance(0, 6, 8.0)
+        @param file_path: Path to the distance CSV file.
+        @param locations: List of Location objects used to size
+                          and initialize the distance graph.
+        @return: Fully populated DistanceGraph object.
+        """
 
-        graph.set_distance(1, 2, 2.0)
-        graph.set_distance(1, 3, 4.0)
-        graph.set_distance(2, 3, 3.0)
+        graph = DistanceGraph(
+            locations
+        )
 
-        graph.set_distance(3, 4, 2.5)
-        graph.set_distance(4, 5, 3.0)
-        graph.set_distance(5, 6, 2.0)
+        # Open the CSV file and load each
+        # location-to-location distance.
+        with open(
+            file_path,
+            newline="",
+            encoding="utf-8-sig"
+        ) as file:
+
+            reader = csv.DictReader(
+                file
+            )
+
+            for row in reader:
+                location1_id = int(
+                    row["location1_id"]
+                )
+
+                location2_id = int(
+                    row["location2_id"]
+                )
+
+                distance = float(
+                    row["distance"]
+                )
+
+                # DistanceGraph stores the value
+                # in both directions because the
+                # WGUPS distance table is symmetric.
+                graph.set_distance(
+                    location1_id,
+                    location2_id,
+                    distance
+                )
 
         return graph

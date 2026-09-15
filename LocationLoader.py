@@ -1,18 +1,44 @@
+import csv
+
 from Location import Location
 
 
 class LocationLoader:
+    """
+    Loads delivery locations from the Locations.csv file.
+
+    Each row is converted into a Location object and returned
+    in a list ordered by location ID.
+    """
 
     @staticmethod
-    def load():
-        locations = [
-            Location(0, "HUB"),
-            Location(1, "1060 Dalton Ave S"),
-            Location(2, "1330 2100 S"),
-            Location(3, "1488 4800 S"),
-            Location(4, "177 W Price Ave"),
-            Location(5, "2010 W 500 S"),
-            Location(6, "2300 Parkway Blvd")
-        ]
+    def load(file_path):
+        """
+        Loads location data from a CSV file.
 
+        @param file_path: Path to the location CSV file.
+        @return: List of Location objects.
+        """
+
+        locations = []
+
+        # Open the CSV file and read each location row.
+        with open(
+            file_path,
+            newline="",
+            encoding="utf-8-sig"
+        ) as file:
+
+            reader = csv.DictReader(file)
+
+            for row in reader:
+                location = Location(
+                    int(row["location_id"]),
+                    row["address"].strip()
+                )
+
+                locations.append(location)
+
+        # Return the complete list so the distance graph
+        # can use matching numeric location IDs.
         return locations
